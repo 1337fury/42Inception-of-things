@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+	config.vm.box = "ubuntu/focal64"
+  
+	# Server
+	config.vm.define "abdeel-oS" do |server|
+	  server.vm.hostname = "abdeel-oS"
+	  server.vm.network "private_network", ip: "192.168.56.110"
+	  server.vm.provider "virtualbox" do |vb|
+		vb.memory = 1024
+		vb.cpus = 1
+		vb.name = "abdeel-oS"
+	  end
+	  server.vm.provision "shell", path: "scripts/k3s_server_install.sh"
+	end
+  
+	# Worker
+	config.vm.define "abdeel-oSW" do |worker|
+	  worker.vm.hostname = "abdeel-oSW"
+	  worker.vm.network "private_network", ip: "192.168.56.111"
+	  worker.vm.provider "virtualbox" do |vb|
+		vb.memory = 1024
+		vb.cpus = 1
+		vb.name = "abdeel-oSW"
+	  end
+	  worker.vm.provision "shell", path: "scripts/k3s_agent_install.sh"
+	end
+  
+	# SSH
+	config.ssh.insert_key = false
+	config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
+  end
