@@ -1,0 +1,22 @@
+# macOS system files
+.DS_Store
+._*
+
+# IDE specific files
+.vscode/
+*~
+
+# Environment files
+.env
+.env.local
+*.env.local
+
+# Build and temporary files
+*.tmp
+*.temp
+
+# Mine
+docs/
+
+# subject
+en.subject.pdf
