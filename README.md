@@ -2,6 +2,64 @@
 
 A system administration project focused on Kubernetes implementation using K3s and K3d.
 
+## Learning Roadmap
+
+### 1. Foundation (Before Part 1)
+- [ ] **Virtualization Basics**
+  - [x] Understanding Virtual Machines
+  - [x] Vagrant fundamentals
+  - [x] Basic Vagrant commands
+  - [ ] Reading Vagrantfile configurations
+
+- [ ] **Linux & Shell**
+  - [ ] Basic shell commands
+  - [ ] Shell scripting
+  - [ ] SSH and key management
+  - [ ] System services (systemd)
+
+- [ ] **Networking Fundamentals**
+  - [x] IP addressing
+  - [ ] Network interfaces
+  - [ ] Port forwarding
+  - [ ] Basic network troubleshooting
+
+### 2. Kubernetes Essentials (During Part 1 & 2)
+- [ ] **Kubernetes Architecture**
+  - [ ] Control plane components
+  - [ ] Worker node components
+  - [ ] Basic Kubernetes objects
+
+- [ ] **K3s Specific**
+  - [ ] K3s vs K8s differences
+  - [ ] K3s architecture
+  - [ ] Server-agent setup
+  - [ ] K3s networking
+
+- [ ] **Basic Kubernetes Operations**
+  - [ ] kubectl basics
+  - [ ] Pod management
+  - [ ] Service creation
+  - [ ] Ingress configuration
+
+### 3. Advanced Concepts (For Part 3)
+- [ ] **GitOps**
+  - [ ] GitOps principles
+  - [ ] Infrastructure as Code
+  - [ ] Version control best practices
+
+- [ ] **CI/CD & Argo CD**
+  - [ ] CI/CD pipeline concepts
+  - [ ] Argo CD architecture
+  - [ ] Application deployment strategies
+  - [ ] K3d concepts and usage
+
+### 4. Project Integration (Bonus)
+- [ ] **GitLab Integration**
+  - [ ] GitLab architecture
+  - [ ] Container registry
+  - [ ] GitLab CI/CD
+  - [ ] Kubernetes integration
+
 ## Project Checklist
 
 ### Part 1: K3s and Vagrant
@@ -53,3 +111,10 @@ A system administration project focused on Kubernetes implementation using K3s a
 - [ ] K3d
 - [x] Docker
 - [x] Git
+
+## Useful Resources
+- [Vagrant Documentation](https://www.vagrantup.com/docs)
+- [K3s Documentation](https://docs.k3s.io/)
+- [Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
+- [Argo CD](https://argo-cd.readthedocs.io/en/stable/)
+- [GitLab K8s Integration](https://docs.gitlab.com/ee/user/infrastructure/clusters/)
