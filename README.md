@@ -5,9 +5,9 @@ A system administration project focused on Kubernetes implementation using K3s a
 ## Project Checklist
 
 ### Part 1: K3s and Vagrant
-- [ ] Setup Vagrant configuration
-  - [ ] Configure Server VM (192.168.56.110)
-  - [ ] Configure ServerWorker VM (192.168.56.111)
+- [x] Setup Vagrant configuration
+  - [x] Configure Server VM (192.168.56.110)
+  - [x] Configure ServerWorker VM (192.168.56.111)
 - [ ] K3s Installation
   - [ ] Server: Controller mode setup
   - [ ] ServerWorker: Agent mode setup
