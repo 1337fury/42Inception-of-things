@@ -5,22 +5,22 @@ A system administration project focused on Kubernetes implementation using K3s a
 ## Learning Roadmap
 
 ### 1. Foundation (Before Part 1)
-- [ ] **Virtualization Basics**
+- [x] **Virtualization Basics**
   - [x] Understanding Virtual Machines
   - [x] Vagrant fundamentals
   - [x] Basic Vagrant commands
-  - [ ] Reading Vagrantfile configurations
+  - [x] Reading Vagrantfile configurations
 
 - [ ] **Linux & Shell**
   - [ ] Basic shell commands
   - [ ] Shell scripting
-  - [ ] SSH and key management
+  - [x] SSH and key management
   - [ ] System services (systemd)
 
 - [ ] **Networking Fundamentals**
   - [x] IP addressing
   - [ ] Network interfaces
-  - [ ] Port forwarding
+  - [x] Port forwarding
   - [ ] Basic network troubleshooting
 
 ### 2. Kubernetes Essentials (During Part 1 & 2)
