@@ -17,6 +17,7 @@
 
 # Mine
 docs/
+.vagrant/
 
 # subject
 en.subject.pdf
