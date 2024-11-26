@@ -118,3 +118,4 @@ A system administration project focused on Kubernetes implementation using K3s a
 - [Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 - [Argo CD](https://argo-cd.readthedocs.io/en/stable/)
 - [GitLab K8s Integration](https://docs.gitlab.com/ee/user/infrastructure/clusters/)
+- [/dev/log for inception-of-things](https://hackmd.io/@nszl/BJYuuBdnh)
