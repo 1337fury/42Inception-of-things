@@ -24,9 +24,4 @@ Vagrant.configure("2") do |config|
 	  end
 	  worker.vm.provision "shell", path: "scripts/k3s_agent_install.sh"
 	end
-  
-	# SSH
-	config.ssh.insert_key = false
-	config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
-	config.ssh.private_key_path = "~/.ssh/id_rsa"
-  end
+end
