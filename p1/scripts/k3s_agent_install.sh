@@ -11,6 +11,10 @@ NC='\033[0m'
 SERVER_IP="192.168.56.110"
 MAX_ATTEMPTS=20
 RETRY_INTERVAL=10
+SSH_OPTS="-o ConnectTimeout=5 \
+          -o StrictHostKeyChecking=no \
+          -o UserKnownHostsFile=/dev/null \
+          -i /vagrant/.vagrant/machines/abdeel-oS/virtualbox/private_key"
 
 handle_error() {
     echo -e "${RED}Error: $1${NC}"
@@ -29,15 +33,12 @@ print_warning() {
     echo -e "${YELLOW}⚠ $1${NC}"
 }
 
-print_status "Waiting for server to be fully initialized..."
-sleep 30
-
 verify_ssh() {
     local ip=$1
     local attempt=1
 
     print_status "Verifying SSH connection to $ip..."
-    while ! ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no vagrant@${ip} "exit" >/dev/null 2>&1; do
+    while ! ssh $SSH_OPTS vagrant@${ip} "exit" >/dev/null 2>&1; do
         if [ $attempt -ge $MAX_ATTEMPTS ]; then
             return 1
         fi
@@ -66,20 +67,32 @@ wait_for_service() {
     return 0
 }
 
-echo -e "${GREEN}"
-echo "╔═══════════════════════════════════════╗"
-echo "║         K3s Agent Installation        ║"
-echo "╚═══════════════════════════════════════╝"
-echo -e "${NC}"
+print_banner() {
+    echo -e "${GREEN}"
+    echo "╔═══════════════════════════════════════╗"
+    echo "║         K3s Agent Installation        ║"
+    echo "╚═══════════════════════════════════════╝"
+    echo -e "${NC}"
+}
+
+print_status "Waiting for server to be fully initialized..."
+sleep 30
+
+print_banner
 
 verify_ssh $SERVER_IP || handle_error "Cannot establish SSH connection to server"
 
 print_status "Retrieving node token from server..."
-NODE_TOKEN=$(ssh -o StrictHostKeyChecking=no vagrant@${SERVER_IP} "sudo cat /var/lib/rancher/k3s/server/node-token") || handle_error "Failed to retrieve node token"
+NODE_TOKEN=$(ssh $SSH_OPTS vagrant@${SERVER_IP} \
+    "sudo cat /var/lib/rancher/k3s/server/node-token") || \
+    handle_error "Failed to retrieve node token"
 print_success "Node token retrieved"
 
 print_status "Installing K3s agent..."
-curl -sfL https://get.k3s.io | K3S_URL="https://${SERVER_IP}:6443" K3S_TOKEN="${NODE_TOKEN}" sh - || handle_error "Failed to install K3s agent"
+curl -sfL https://get.k3s.io | \
+    K3S_URL="https://${SERVER_IP}:6443" \
+    K3S_TOKEN="${NODE_TOKEN}" \
+    sh - || handle_error "Failed to install K3s agent"
 print_success "K3s agent installed"
 
 wait_for_service k3s-agent || handle_error "K3s agent service failed to start"

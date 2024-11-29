@@ -61,31 +61,46 @@ verify_node() {
     return 0
 }
 
-echo -e "${GREEN}"
-echo "╔═══════════════════════════════════════╗"
-echo "║         K3s Server Installation       ║"
-echo "╚═══════════════════════════════════════╝"
-echo -e "${NC}"
+print_banner() {
+    echo -e "${GREEN}"
+    echo "╔═══════════════════════════════════════╗"
+    echo "║         K3s Server Installation       ║"
+    echo "╚═══════════════════════════════════════╝"
+    echo -e "${NC}"
+}
 
-# Main installation
+setup_kubeconfig() {
+    print_status "Setting up kubeconfig permissions..."
+    sudo mkdir -p /home/vagrant/.kube
+    sudo cp /etc/rancher/k3s/k3s.yaml /home/vagrant/.kube/config
+    sudo chown -R vagrant:vagrant /home/vagrant/.kube
+    sudo chmod 600 /home/vagrant/.kube/config
+    print_success "Kubeconfig permissions updated"
+}
+
+print_banner
+
 print_status "Installing K3s server..."
-curl -sfL https://get.k3s.io | sh - || handle_error "Failed to install K3s"
+curl -sfL https://get.k3s.io | \
+    INSTALL_K3S_EXEC="--write-kubeconfig-mode 644" \
+    sh - || handle_error "Failed to install K3s"
 print_success "K3s installed successfully"
 
-# Wait for k3s service
-wait_for_service k3s || handle_error "K3s service failed to start"
+wait_for_service k3s || \
+    handle_error "K3s service failed to start"
 
-# Verify kubectl is installed
 print_status "Checking kubectl installation..."
-command -v kubectl >/dev/null 2>&1 || handle_error "kubectl not installed"
+command -v kubectl >/dev/null 2>&1 || \
+    handle_error "kubectl not installed"
 print_success "kubectl is available"
 
 verify_node || handle_error "Node failed to become ready"
 
-# Make token accessible for worker nodes
 print_status "Configuring node token permissions..."
 sudo chmod 644 /var/lib/rancher/k3s/server/node-token
 print_success "Token permissions updated"
+
+setup_kubeconfig
 
 echo -e "\n${GREEN}╔═══════════════════════════════════════╗"
 echo "║    K3s Server Setup Complete! 🚀      ║"
