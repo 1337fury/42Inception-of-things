@@ -12,7 +12,7 @@ A system administration project focused on Kubernetes implementation using K3s a
   - [x] Reading Vagrantfile configurations
 
 - [ ] **Linux & Shell**
-  - [ ] Basic shell commands
+  - [x] Basic shell commands
   - [ ] Shell scripting
   - [x] SSH and key management
   - [ ] System services (systemd)
@@ -66,11 +66,11 @@ A system administration project focused on Kubernetes implementation using K3s a
 - [x] Setup Vagrant configuration
   - [x] Configure Server VM (192.168.56.110)
   - [x] Configure ServerWorker VM (192.168.56.111)
-- [ ] K3s Installation
-  - [ ] Server: Controller mode setup
-  - [ ] ServerWorker: Agent mode setup
-- [ ] Configure SSH password-less access
-- [ ] Test cluster connectivity
+- [x] K3s Installation
+  - [x] Server: Controller mode setup
+  - [x] ServerWorker: Agent mode setup
+- [x] Configure SSH password-less access
+- [x] Test cluster connectivity
 
 ### Part 2: K3s and Three Simple Applications
 - [ ] Single VM Setup
